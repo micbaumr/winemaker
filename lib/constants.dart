@@ -1,0 +1,1 @@
+int averageNonSugarSubstances = 4;
