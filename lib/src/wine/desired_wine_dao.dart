@@ -1,6 +1,6 @@
 import 'package:moor/moor.dart';
-import 'package:winemaker/database/database.dart';
-import 'package:winemaker/wine/desired_wine.dart';
+import 'package:winemaker/src/database/database.dart';
+import 'package:winemaker/src/wine/desired_wine.dart';
 
 part 'desired_wine_dao.g.dart';
 

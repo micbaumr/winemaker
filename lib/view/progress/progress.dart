@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:winemaker/task/task_item.dart';
+import 'package:winemaker/view/progress/task_row.dart';
 
 class Progress extends StatelessWidget {
-  const Progress({Key? key, required this.tasksAndProgress}) : super(key: key);
+  final List<TaskRow> tasks;
+  final int numberOfCompletedTasks;
 
-  final Map<TaskItem, bool> tasksAndProgress;
+  const Progress({Key? key, required this.tasks, required this.numberOfCompletedTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var numberOfCompletedTasks = tasksAndProgress.values.where((element) => element == true).length;
-    var totalNumberOfTasks = tasksAndProgress.length;
+    var totalNumberOfTasks = tasks.length;
     var progress = numberOfCompletedTasks / totalNumberOfTasks;
 
     return Column(

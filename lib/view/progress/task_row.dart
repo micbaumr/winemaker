@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TaskItem extends StatelessWidget {
+class TaskRow extends StatelessWidget {
   final String label;
   final Widget taskScreen;
+  final bool isCompleted;
 
-  const TaskItem({Key? key, required this.label, required this.taskScreen}) : super(key: key);
+  const TaskRow({Key? key, required this.label, required this.taskScreen, required this.isCompleted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Checkbox(value: false, onChanged: null),
+        Checkbox(value: isCompleted, onChanged: null),
         ElevatedButton(
           child: Text(label),
           onPressed: () {

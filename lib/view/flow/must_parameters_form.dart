@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:moor/moor.dart' as moor;
 import 'package:provider/provider.dart';
-import 'package:winemaker/database/database.dart';
-import 'package:winemaker/flow/must_parameters_display.dart';
+import 'package:winemaker/src/database/database.dart';
+import 'package:winemaker/view/flow/must_parameters_display.dart';
 
 class MustParametersForm extends StatefulWidget {
   const MustParametersForm({Key? key}) : super(key: key);

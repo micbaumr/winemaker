@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:winemaker/database/database.dart';
-import 'package:winemaker/flow/progress_screen.dart';
+import 'package:winemaker/src/database/database.dart';
+import 'package:winemaker/view/progress/progress_screen.dart';
 
 void main() => runApp(MyApp());
 

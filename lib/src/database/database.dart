@@ -1,13 +1,13 @@
-import 'package:moor/moor.dart';
-import 'package:winemaker/must/must.dart';
-import 'package:winemaker/must/must_dao.dart';
-import 'package:winemaker/wine/desired_wine.dart';
-import 'package:moor/ffi.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 import 'dart:io';
 
-import 'package:winemaker/wine/desired_wine_dao.dart';
+import 'package:moor/ffi.dart';
+import 'package:moor/moor.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+import 'package:winemaker/src/must/must.dart';
+import 'package:winemaker/src/must/must_dao.dart';
+import 'package:winemaker/src/wine/desired_wine.dart';
+import 'package:winemaker/src/wine/desired_wine_dao.dart';
 
 part 'database.g.dart';
 
@@ -29,10 +29,7 @@ class MyDatabase extends _$MyDatabase {
   int get schemaVersion => 1;
 
   @override
-  MigrationStrategy get migration =>
-      MigrationStrategy(
-          onCreate: (m) async {
-            await m.createAll();
-          }
-      );
+  MigrationStrategy get migration => MigrationStrategy(onCreate: (m) async {
+        await m.createAll();
+      });
 }
