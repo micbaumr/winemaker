@@ -1,11 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'must_dao.dart';
+part of 'desired_wine_dao.dart';
 
 // **************************************************************************
 // DaoGenerator
 // **************************************************************************
 
-mixin _$MustDaoMixin on DatabaseAccessor<MyDatabase> {
-  $MustTable get must => attachedDatabase.must;
+mixin _$DesiredWineDaoMixin on DatabaseAccessor<MyDatabase> {
+  $DesiredWineEntityTable get desiredWineEntity =>
+      attachedDatabase.desiredWineEntity;
 }

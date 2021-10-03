@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:winemaker/view/progress/task_row.dart';
+import 'package:winemaker/view/recipe/task_row.dart';
 
 class TaskList extends StatefulWidget {
   final List<TaskRow> tasks;

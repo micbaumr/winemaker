@@ -5,7 +5,12 @@ class TaskRow extends StatelessWidget {
   final Widget taskScreen;
   final bool isCompleted;
 
-  const TaskRow({Key? key, required this.label, required this.taskScreen, required this.isCompleted}) : super(key: key);
+  const TaskRow(
+      {Key? key,
+      required this.label,
+      required this.taskScreen,
+      required this.isCompleted})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
