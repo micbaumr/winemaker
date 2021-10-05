@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:winemaker/view/task/adding_ingredients/ingredients_screen.dart';
 import 'package:winemaker/view/task/desired_wine_form.dart';
 import 'package:winemaker/view/task/measurements_form.dart';
 import 'package:winemaker/view/task/must_parameters_display.dart';
@@ -16,21 +17,20 @@ extension TaskTypeExtension on TaskType {
     switch (this) {
       case TaskType.simpleTask:
         // TODO: return correct widget
-        return MustParametersDisplay();
+        return const MustParametersDisplay();
 
       case TaskType.desiredWineForm:
-        return DesiredWineForm();
+        return const DesiredWineForm();
 
       case TaskType.measurementForm:
-        return MeasurementsForm();
+        return const MeasurementsForm();
 
       case TaskType.addingIngredients:
-        // TODO: return correct widget
-        return MeasurementsForm();
+        return const IngredientsScreen();
 
       case TaskType.taskWithNotification:
         // TODO: return correct widget
-        return MeasurementsForm();
+        return const MeasurementsForm();
     }
   }
 }

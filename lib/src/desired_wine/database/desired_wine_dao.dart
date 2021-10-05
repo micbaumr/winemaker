@@ -17,6 +17,11 @@ class DesiredWineDao extends DatabaseAccessor<MyDatabase>
       (select(desiredWineEntity)..where((tbl) => tbl.id.equals(id)))
           .getSingle();
 
-  Future<int> addDesiredWine(DesiredWineEntityCompanion entry) =>
-      into(desiredWineEntity).insert(entry);
+  Future<int> addDesiredWine(DesiredWineEntityData wine) =>
+      into(desiredWineEntity).insert(wine);
+
+  Future updateDesiredWine(int id, DesiredWineEntityCompanion wine) {
+    return (update(desiredWineEntity)..where((i) => i.id.equals(id)))
+        .write(wine);
+  }
 }

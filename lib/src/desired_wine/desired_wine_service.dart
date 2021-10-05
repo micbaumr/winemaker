@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:winemaker/src/database/database.dart';
-import 'package:winemaker/src/database/moor_value_extension.dart';
 import 'package:winemaker/src/future/future_mapper.dart';
 
 import 'desired_wine.dart';
@@ -15,9 +14,10 @@ class DesiredWineService {
 
   void saveDesiredWineParameters(DesiredWine desiredWine) {
     database.desiredWineDao.addDesiredWine(
-      DesiredWineEntityCompanion(
-        alcohol: desiredWine.alcohol.toMoorValue(),
-        sugar: desiredWine.sugar.toMoorValue(),
+      DesiredWineEntityData(
+        id: 1,
+        alcohol: desiredWine.alcohol,
+        sugar: desiredWine.sugar,
       ),
     );
   }

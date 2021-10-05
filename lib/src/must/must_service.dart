@@ -13,8 +13,19 @@ class MustService {
   MustService(this.context)
       : database = Provider.of<MyDatabase>(context, listen: false);
 
-  void saveMustMeasurements(MustMeasurements mustMeasurements) {
+  void saveInitialMustMeasurements(MustMeasurements mustMeasurements) {
     database.mustDao.addMust(
+      MustEntityData(
+        id: 1,
+        volume: mustMeasurements.volume,
+        sugar: mustMeasurements.sugar,
+      ),
+    );
+  }
+
+  void saveMustMeasurements(MustMeasurements mustMeasurements) {
+    database.mustDao.updateMust(
+      1,
       MustEntityCompanion(
         volume: mustMeasurements.volume.toMoorValue(),
         sugar: mustMeasurements.sugar.toMoorValue(),

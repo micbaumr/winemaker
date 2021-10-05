@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:winemaker/src/database/database.dart';
@@ -25,7 +27,7 @@ class IngredientsService {
     );
   }
 
-  void addInitialIngredients(int id, Ingredients requiredIngredients) {
+  void saveInitialIngredients(int id, Ingredients requiredIngredients) {
     const initialZero = 0.0;
     const initialFalse = false;
 
@@ -42,12 +44,14 @@ class IngredientsService {
         addedNutrients: initialFalse,
       ),
     );
+
+    developer.log("Initial ingredients saved!");
   }
 
-  Future<IngredientList> getDesiredWineById(int id) =>
-      database.ingredientsDao.ingredientsById(id).map((data) => IngredientList(
-          Ingredients(data.requiredSugar, data.requiredWater,
-              data.requiredYeast, data.requiredNutrients),
-          Ingredients(data.addedSugar, data.addedWater, data.addedYeast,
-              data.addedNutrients)));
+  Future<Ingredients> getRemainingIngredients(int id) =>
+      database.ingredientsDao.ingredientsById(id).map((data) => Ingredients(
+          data.requiredSugar - data.addedSugar,
+          data.requiredWater - data.addedWater,
+          data.requiredYeast != data.addedYeast,
+          data.requiredNutrients != data.addedNutrients));
 }

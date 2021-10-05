@@ -66,6 +66,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
   void _saveMeasurements() {
     var volume = parseDoubleInput(volumeController.text);
     var sugar = parseDoubleInput(sugarController.text);
-    mustService.saveMustMeasurements(MustMeasurements(volume, sugar));
+    mustService.saveInitialMustMeasurements(MustMeasurements(volume, sugar));
   }
 }
