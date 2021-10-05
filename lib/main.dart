@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:winemaker/src/constants/recipes.dart';
 import 'package:winemaker/src/database/database.dart';
-import 'package:winemaker/view/progress/progress_screen.dart';
+import 'package:winemaker/view/recipe/recipe.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,7 +36,10 @@ class StartWineMaker extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProgressScreen()),
+                MaterialPageRoute(
+                    builder: (context) => RecipeView(
+                          recipe: redWineRecipe,
+                        )),
               );
             },
           ),

@@ -1,7 +1,9 @@
 import 'package:moor/moor.dart';
 
-class DesiredWine extends Table{
+class DesiredWineEntity extends Table {
   IntColumn get id => integer().autoIncrement()();
+
   RealColumn get alcohol => real()();
+
   RealColumn get sugar => real()();
 }

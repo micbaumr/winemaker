@@ -1,4 +1,4 @@
-import 'package:winemaker/task/task_type.dart';
+import 'task_type.dart';
 
 class Task {
   String name;
