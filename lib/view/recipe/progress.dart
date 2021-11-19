@@ -4,15 +4,12 @@ class Progress extends StatelessWidget {
   final int totalNumberOfTasks;
   final int numberOfCompletedTasks;
 
-  const Progress(
-      {Key? key,
-      required this.totalNumberOfTasks,
-      required this.numberOfCompletedTasks})
-      : super(key: key);
+  const Progress({Key? key, required this.totalNumberOfTasks, required this.numberOfCompletedTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var progress = numberOfCompletedTasks / totalNumberOfTasks;
+    var isEmpty = totalNumberOfTasks == 0;
+    var progress = isEmpty ? 0.0 : numberOfCompletedTasks / totalNumberOfTasks;
 
     return Column(
       children: [

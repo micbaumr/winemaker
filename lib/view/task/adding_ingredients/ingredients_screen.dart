@@ -4,36 +4,26 @@ import 'package:winemaker/view/constants.dart';
 import 'package:winemaker/view/task/adding_ingredients/added_ingredients_form.dart';
 import 'package:winemaker/view/task/adding_ingredients/required_ingredients_display.dart';
 
-class IngredientsScreen extends StatefulWidget {
-  const IngredientsScreen({Key? key}) : super(key: key);
+class IngredientsScreen extends StatelessWidget {
+  const IngredientsScreen({Key? key, required this.currentTaskIndex}) : super(key: key);
 
-  @override
-  _IngredientsScreenState createState() => _IngredientsScreenState();
-}
+  final int currentTaskIndex;
 
-class _IngredientsScreenState extends State<IngredientsScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> ingredientsView = [
-      const Text("Ingredients added:",
-          textAlign: TextAlign.center, style: biggerFont),
+      const Text("Ingredients added:", textAlign: TextAlign.center, style: biggerFont),
       const RequiredIngredientsDisplay(),
       const Divider(),
-      const Text("Remaining ingredients to add",
-          textAlign: TextAlign.center, style: biggerFont),
-      const IngredientsForm(),
+      const Text("Remaining ingredients to add", textAlign: TextAlign.center, style: biggerFont),
+      IngredientsForm(currentTaskIndex: currentTaskIndex),
     ];
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Adding ingredients'),
-        ),
-        body: Column(children: [
-          Expanded(child: ListView(children: ingredientsView)),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Start Winemaker"),
-          ),
-        ]));
+      appBar: AppBar(
+        title: const Text('Adding ingredients'),
+      ),
+      body: ListView(children: ingredientsView),
+    );
   }
 }

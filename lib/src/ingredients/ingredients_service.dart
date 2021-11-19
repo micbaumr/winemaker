@@ -10,7 +10,7 @@ import 'ingredients.dart';
 
 class IngredientsService {
   final BuildContext context;
-  MyDatabase database;
+  final MyDatabase database;
 
   IngredientsService(this.context)
       : database = Provider.of<MyDatabase>(context, listen: false);

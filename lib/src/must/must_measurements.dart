@@ -1,6 +1,6 @@
 class MustMeasurements {
-  double volume;
-  double sugar;
+  final double volume;
+  final double sugar;
 
   MustMeasurements(this.volume, this.sugar);
 }

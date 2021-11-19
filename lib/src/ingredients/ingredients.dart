@@ -1,15 +1,15 @@
 class IngredientList {
-  Ingredients requiredIngredients;
-  Ingredients addedIngredients;
+  final Ingredients requiredIngredients;
+  final Ingredients addedIngredients;
 
   IngredientList(this.requiredIngredients, this.addedIngredients);
 }
 
 class Ingredients {
-  double sugar;
-  double water;
-  bool yeast;
-  bool nutrients;
+  final double sugar;
+  final double water;
+  final bool yeast;
+  final bool nutrients;
 
   Ingredients(this.sugar, this.water, this.yeast, this.nutrients);
 }

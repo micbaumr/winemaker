@@ -11,8 +11,7 @@ class MustDao extends DatabaseAccessor<MyDatabase> with _$MustDaoMixin {
 
   Future<List<MustEntityData>> get allMustEntries => select(mustEntity).get();
 
-  Future<MustEntityData> mustById(int id) =>
-      (select(mustEntity)..where((tbl) => tbl.id.equals(id))).getSingle();
+  Future<MustEntityData> mustById(int id) => (select(mustEntity)..where((tbl) => tbl.id.equals(id))).getSingle();
 
   Future<int> addMust(MustEntityData entry) => into(mustEntity).insert(entry);
 

@@ -7,7 +7,7 @@ import 'desired_wine.dart';
 
 class DesiredWineService {
   final BuildContext context;
-  MyDatabase database;
+  final MyDatabase database;
 
   DesiredWineService(this.context)
       : database = Provider.of<MyDatabase>(context, listen: false);

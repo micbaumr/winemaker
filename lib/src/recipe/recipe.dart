@@ -1,7 +1,7 @@
 import 'task.dart';
 
 class Recipe {
-  List<Task> tasks;
+  final List<Task> tasks;
 
   Recipe(this.tasks);
 }

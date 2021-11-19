@@ -8,10 +8,9 @@ import 'must_measurements.dart';
 
 class MustService {
   final BuildContext context;
-  MyDatabase database;
+  final MyDatabase database;
 
-  MustService(this.context)
-      : database = Provider.of<MyDatabase>(context, listen: false);
+  MustService(this.context) : database = Provider.of<MyDatabase>(context, listen: false);
 
   void saveInitialMustMeasurements(MustMeasurements mustMeasurements) {
     database.mustDao.addMust(
@@ -33,7 +32,6 @@ class MustService {
     );
   }
 
-  Future<MustMeasurements> getMustMeasurementsById(int id) => database.mustDao
-      .mustById(id)
-      .map((data) => MustMeasurements(data.volume, data.sugar));
+  Future<MustMeasurements> getMustMeasurementsById(int id) =>
+      database.mustDao.mustById(id).map((data) => MustMeasurements(data.volume, data.sugar));
 }

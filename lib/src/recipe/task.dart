@@ -1,11 +1,9 @@
 import 'task_type.dart';
 
 class Task {
-  String name;
-  TaskType type;
-  Map<String, Object>? args;
+  final String name;
+  final TaskType type;
+  final Map<String, Object>? args;
 
-  Task(this.name, this.type);
-
-  Task.withArgs(this.name, this.type, this.args);
+  Task(this.name, this.type, {this.args});
 }

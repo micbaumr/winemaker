@@ -80,8 +80,7 @@ class DesiredWineEntityData extends DataClass
   }
 
   @override
-  int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(alcohol.hashCode, sugar.hashCode)));
+  int get hashCode => Object.hash(id, alcohol, sugar);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -288,8 +287,7 @@ class MustEntityData extends DataClass implements Insertable<MustEntityData> {
   }
 
   @override
-  int get hashCode =>
-      $mrjf($mrjc(id.hashCode, $mrjc(volume.hashCode, sugar.hashCode)));
+  int get hashCode => Object.hash(id, volume, sugar);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -567,22 +565,8 @@ class IngredientsEntityData extends DataClass
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(
-          requiredSugar.hashCode,
-          $mrjc(
-              addedSugar.hashCode,
-              $mrjc(
-                  requiredWater.hashCode,
-                  $mrjc(
-                      addedWater.hashCode,
-                      $mrjc(
-                          requiredYeast.hashCode,
-                          $mrjc(
-                              addedYeast.hashCode,
-                              $mrjc(requiredNutrients.hashCode,
-                                  addedNutrients.hashCode)))))))));
+  int get hashCode => Object.hash(id, requiredSugar, addedSugar, requiredWater,
+      addedWater, requiredYeast, addedYeast, requiredNutrients, addedNutrients);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -897,6 +881,227 @@ class $IngredientsEntityTable extends IngredientsEntity
   }
 }
 
+class RecipeRealizationEntityData extends DataClass
+    implements Insertable<RecipeRealizationEntityData> {
+  final int id;
+  final int currentTask;
+  final AvailableRecipes recipe;
+  RecipeRealizationEntityData(
+      {required this.id, required this.currentTask, required this.recipe});
+  factory RecipeRealizationEntityData.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return RecipeRealizationEntityData(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      currentTask: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}current_task'])!,
+      recipe: $RecipeRealizationEntityTable.$converter0.mapToDart(
+          const IntType()
+              .mapFromDatabaseResponse(data['${effectivePrefix}recipe']))!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['current_task'] = Variable<int>(currentTask);
+    {
+      final converter = $RecipeRealizationEntityTable.$converter0;
+      map['recipe'] = Variable<int>(converter.mapToSql(recipe)!);
+    }
+    return map;
+  }
+
+  RecipeRealizationEntityCompanion toCompanion(bool nullToAbsent) {
+    return RecipeRealizationEntityCompanion(
+      id: Value(id),
+      currentTask: Value(currentTask),
+      recipe: Value(recipe),
+    );
+  }
+
+  factory RecipeRealizationEntityData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return RecipeRealizationEntityData(
+      id: serializer.fromJson<int>(json['id']),
+      currentTask: serializer.fromJson<int>(json['currentTask']),
+      recipe: serializer.fromJson<AvailableRecipes>(json['recipe']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'currentTask': serializer.toJson<int>(currentTask),
+      'recipe': serializer.toJson<AvailableRecipes>(recipe),
+    };
+  }
+
+  RecipeRealizationEntityData copyWith(
+          {int? id, int? currentTask, AvailableRecipes? recipe}) =>
+      RecipeRealizationEntityData(
+        id: id ?? this.id,
+        currentTask: currentTask ?? this.currentTask,
+        recipe: recipe ?? this.recipe,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('RecipeRealizationEntityData(')
+          ..write('id: $id, ')
+          ..write('currentTask: $currentTask, ')
+          ..write('recipe: $recipe')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, currentTask, recipe);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RecipeRealizationEntityData &&
+          other.id == this.id &&
+          other.currentTask == this.currentTask &&
+          other.recipe == this.recipe);
+}
+
+class RecipeRealizationEntityCompanion
+    extends UpdateCompanion<RecipeRealizationEntityData> {
+  final Value<int> id;
+  final Value<int> currentTask;
+  final Value<AvailableRecipes> recipe;
+  const RecipeRealizationEntityCompanion({
+    this.id = const Value.absent(),
+    this.currentTask = const Value.absent(),
+    this.recipe = const Value.absent(),
+  });
+  RecipeRealizationEntityCompanion.insert({
+    this.id = const Value.absent(),
+    required int currentTask,
+    required AvailableRecipes recipe,
+  })  : currentTask = Value(currentTask),
+        recipe = Value(recipe);
+  static Insertable<RecipeRealizationEntityData> custom({
+    Expression<int>? id,
+    Expression<int>? currentTask,
+    Expression<AvailableRecipes>? recipe,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (currentTask != null) 'current_task': currentTask,
+      if (recipe != null) 'recipe': recipe,
+    });
+  }
+
+  RecipeRealizationEntityCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? currentTask,
+      Value<AvailableRecipes>? recipe}) {
+    return RecipeRealizationEntityCompanion(
+      id: id ?? this.id,
+      currentTask: currentTask ?? this.currentTask,
+      recipe: recipe ?? this.recipe,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (currentTask.present) {
+      map['current_task'] = Variable<int>(currentTask.value);
+    }
+    if (recipe.present) {
+      final converter = $RecipeRealizationEntityTable.$converter0;
+      map['recipe'] = Variable<int>(converter.mapToSql(recipe.value)!);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RecipeRealizationEntityCompanion(')
+          ..write('id: $id, ')
+          ..write('currentTask: $currentTask, ')
+          ..write('recipe: $recipe')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RecipeRealizationEntityTable extends RecipeRealizationEntity
+    with TableInfo<$RecipeRealizationEntityTable, RecipeRealizationEntityData> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $RecipeRealizationEntityTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _currentTaskMeta =
+      const VerificationMeta('currentTask');
+  late final GeneratedColumn<int?> currentTask = GeneratedColumn<int?>(
+      'current_task', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _recipeMeta = const VerificationMeta('recipe');
+  late final GeneratedColumnWithTypeConverter<AvailableRecipes, int?> recipe =
+      GeneratedColumn<int?>('recipe', aliasedName, false,
+              typeName: 'INTEGER', requiredDuringInsert: true)
+          .withConverter<AvailableRecipes>(
+              $RecipeRealizationEntityTable.$converter0);
+  @override
+  List<GeneratedColumn> get $columns => [id, currentTask, recipe];
+  @override
+  String get aliasedName => _alias ?? 'recipe_realization_entity';
+  @override
+  String get actualTableName => 'recipe_realization_entity';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<RecipeRealizationEntityData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('current_task')) {
+      context.handle(
+          _currentTaskMeta,
+          currentTask.isAcceptableOrUnknown(
+              data['current_task']!, _currentTaskMeta));
+    } else if (isInserting) {
+      context.missing(_currentTaskMeta);
+    }
+    context.handle(_recipeMeta, const VerificationResult.success());
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RecipeRealizationEntityData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    return RecipeRealizationEntityData.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $RecipeRealizationEntityTable createAlias(String alias) {
+    return $RecipeRealizationEntityTable(_db, alias);
+  }
+
+  static TypeConverter<AvailableRecipes, int> $converter0 =
+      const EnumIndexConverter<AvailableRecipes>(AvailableRecipes.values);
+}
+
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $DesiredWineEntityTable desiredWineEntity =
@@ -904,12 +1109,20 @@ abstract class _$MyDatabase extends GeneratedDatabase {
   late final $MustEntityTable mustEntity = $MustEntityTable(this);
   late final $IngredientsEntityTable ingredientsEntity =
       $IngredientsEntityTable(this);
+  late final $RecipeRealizationEntityTable recipeRealizationEntity =
+      $RecipeRealizationEntityTable(this);
   late final DesiredWineDao desiredWineDao = DesiredWineDao(this as MyDatabase);
   late final MustDao mustDao = MustDao(this as MyDatabase);
   late final IngredientsDao ingredientsDao = IngredientsDao(this as MyDatabase);
+  late final RecipeRealizationDao recipeRealizationDao =
+      RecipeRealizationDao(this as MyDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [desiredWineEntity, mustEntity, ingredientsEntity];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        desiredWineEntity,
+        mustEntity,
+        ingredientsEntity,
+        recipeRealizationEntity
+      ];
 }

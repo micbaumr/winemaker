@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:winemaker/src/ingredients/ingredients.dart';
 import 'package:winemaker/src/ingredients/ingredients_service.dart';
+import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/src/user_input_utils.dart';
-import 'package:winemaker/view/task/must_parameters_display.dart';
+import 'package:winemaker/view/recipe/recipe_view.dart';
 import 'package:winemaker/view/utils/form_builder.dart';
 
 class IngredientsForm extends StatefulWidget {
-  const IngredientsForm({Key? key}) : super(key: key);
+  const IngredientsForm({Key? key, required this.currentTaskIndex}) : super(key: key);
+
+  final int currentTaskIndex;
 
   @override
   _IngredientsFormState createState() => _IngredientsFormState();
@@ -19,6 +22,7 @@ class _IngredientsFormState extends State<IngredientsForm> {
   bool wasYeastAdded = false;
   bool wereNutrientsAdded = false;
   late IngredientsService ingredientsService;
+  late RecipeRealizationService recipeRealizationService;
 
   @override
   void dispose() {
@@ -30,14 +34,14 @@ class _IngredientsFormState extends State<IngredientsForm> {
   @override
   Widget build(BuildContext context) {
     ingredientsService = IngredientsService(context);
+    recipeRealizationService = RecipeRealizationService(context);
 
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          getNumberFormField(sugarController, "Added sugar in kg",
-              autofocus: true),
+          getNumberFormField(sugarController, "Added sugar in kg", autofocus: true),
           getNumberFormField(waterController, "Added water in litres"),
           Row(
             children: [
@@ -70,17 +74,17 @@ class _IngredientsFormState extends State<IngredientsForm> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
+              child: const Text('Submit'),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _saveIngredients(context);
-                  Navigator.push(
+                  recipeRealizationService.updateRecipeRealizationCurrentTask(widget.currentTaskIndex + 1);
+                  Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const MustParametersDisplay()),
+                    MaterialPageRoute(builder: (context) => const RecipeViewWrapper(realizationId: 1)),
                   );
                 }
               },
-              child: const Text('Submit'),
             ),
           )
         ],
@@ -91,7 +95,6 @@ class _IngredientsFormState extends State<IngredientsForm> {
   void _saveIngredients(BuildContext context) {
     var sugar = parseDoubleInput(sugarController.text);
     var water = parseDoubleInput(waterController.text);
-    ingredientsService.saveAddedIngredients(
-        1, Ingredients(sugar, water, wasYeastAdded, wereNutrientsAdded));
+    ingredientsService.saveAddedIngredients(1, Ingredients(sugar, water, wasYeastAdded, wereNutrientsAdded));
   }
 }

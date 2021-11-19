@@ -3,7 +3,7 @@ import 'package:winemaker/main.dart';
 
 void main() {
   testWidgets('Should show task list when started', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(const MyApp());
 
     expect(find.text('Start Winemaker'), findsOneWidget);
 

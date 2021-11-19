@@ -9,3 +9,16 @@ final Recipe redWineRecipe = Recipe([
   Task("Add first ingredients", TaskType.addingIngredients),
   Task("Add second ingredients", TaskType.addingIngredients),
 ]);
+
+enum AvailableRecipes {
+  redWine,
+}
+
+extension AvaliableRecipesExtension on AvailableRecipes {
+  Recipe getRecipe() {
+    switch (this) {
+      case AvailableRecipes.redWine:
+        return redWineRecipe;
+    }
+  }
+}
