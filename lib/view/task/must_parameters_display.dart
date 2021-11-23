@@ -8,7 +8,6 @@ import 'package:winemaker/src/must/must_measurements.dart';
 import 'package:winemaker/src/must/must_service.dart';
 import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/view/constants.dart';
-import 'package:winemaker/view/recipe/recipe_view.dart';
 import 'package:winemaker/view/utils/future_builder.dart';
 
 class MustParametersDisplay extends StatelessWidget {
@@ -41,10 +40,7 @@ class MustParametersDisplay extends StatelessWidget {
               //TODO CALCULATE REQUIRED INGREDIENTS
               ingredientsService.saveInitialIngredients(1, Ingredients(15, 30, true, true));
               recipeRealizationService.updateRecipeRealizationCurrentTask(currentTaskIndex + 1);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const RecipeViewWrapper(realizationId: 1)),
-              );
+              Navigator.pop(context, true);
             },
           ),
         ]));

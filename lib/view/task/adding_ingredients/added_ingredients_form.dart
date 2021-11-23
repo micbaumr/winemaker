@@ -3,7 +3,6 @@ import 'package:winemaker/src/ingredients/ingredients.dart';
 import 'package:winemaker/src/ingredients/ingredients_service.dart';
 import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/src/user_input_utils.dart';
-import 'package:winemaker/view/recipe/recipe_view.dart';
 import 'package:winemaker/view/utils/form_builder.dart';
 
 class IngredientsForm extends StatefulWidget {
@@ -78,11 +77,7 @@ class _IngredientsFormState extends State<IngredientsForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _saveIngredients(context);
-                  recipeRealizationService.updateRecipeRealizationCurrentTask(widget.currentTaskIndex + 1);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RecipeViewWrapper(realizationId: 1)),
-                  );
+                  Navigator.pop(context, true);
                 }
               },
             ),

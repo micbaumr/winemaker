@@ -8,7 +8,7 @@ Tasks:
 
 - [ ] Recipe view:
     - [ ] Only current task is clickable
-    - [ ] After completing few tasks, back button goes to welcome screen
+    - [x] ~~After completing few tasks, back button goes to welcome screen~~
     - [ ] Use icons instead of list with checkboxes
     - [ ] Revert completed tasks
 - [ ] Ingredients screen:
