@@ -4,9 +4,12 @@ class TaskRow extends StatelessWidget {
   final String label;
   final Widget taskScreen;
   final bool isCompleted;
+  final bool isAvailable;
   final Function() onCompleted;
 
-  const TaskRow({Key? key, required this.label, required this.taskScreen, required this.isCompleted, required this.onCompleted}) : super(key: key);
+  const TaskRow(
+      {Key? key, required this.label, required this.taskScreen, required this.isCompleted, required this.onCompleted, required this.isAvailable})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +19,7 @@ class TaskRow extends StatelessWidget {
         Checkbox(value: isCompleted, onChanged: null),
         ElevatedButton(
           child: Text(label),
-          onPressed: () {
-            _navigateToTaskScreenAndCompleteTask(context);
-          },
+          onPressed: isAvailable ? () => _navigateToTaskScreenAndCompleteTask(context) : null,
         ),
       ],
     );
