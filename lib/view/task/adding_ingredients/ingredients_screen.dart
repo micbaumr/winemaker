@@ -5,9 +5,7 @@ import 'package:winemaker/view/task/adding_ingredients/added_ingredients_form.da
 import 'package:winemaker/view/task/adding_ingredients/required_ingredients_display.dart';
 
 class IngredientsScreen extends StatelessWidget {
-  const IngredientsScreen({Key? key, required this.currentTaskIndex}) : super(key: key);
-
-  final int currentTaskIndex;
+  const IngredientsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class IngredientsScreen extends StatelessWidget {
       const RequiredIngredientsDisplay(),
       const Divider(),
       const Text("Remaining ingredients to add", textAlign: TextAlign.center, style: biggerFont),
-      IngredientsForm(currentTaskIndex: currentTaskIndex),
+      const IngredientsForm(),
     ];
 
     return Scaffold(

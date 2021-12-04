@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:winemaker/src/must/must_measurements.dart';
 import 'package:winemaker/src/must/must_service.dart';
-import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/src/user_input_utils.dart';
 import 'package:winemaker/view/utils/form_builder.dart';
 
 class MeasurementsForm extends StatefulWidget {
-  const MeasurementsForm({Key? key, required this.currentTaskIndex}) : super(key: key);
-
-  final int currentTaskIndex;
+  const MeasurementsForm({Key? key}) : super(key: key);
 
   @override
   _MeasurementsFormState createState() => _MeasurementsFormState();
@@ -19,7 +16,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
   final volumeController = TextEditingController();
   final sugarController = TextEditingController();
   late MustService mustService;
-  late RecipeRealizationService recipeRealizationService;
 
   @override
   void dispose() {
@@ -31,7 +27,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
   @override
   Widget build(BuildContext context) {
     mustService = MustService(context);
-    recipeRealizationService = RecipeRealizationService(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -51,7 +46,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _saveMeasurements();
-                      recipeRealizationService.updateRecipeRealizationCurrentTask(widget.currentTaskIndex + 1);
                       Navigator.pop(context, true);
                     }
                   },

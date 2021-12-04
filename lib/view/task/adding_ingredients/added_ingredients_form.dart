@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:winemaker/src/ingredients/ingredients.dart';
 import 'package:winemaker/src/ingredients/ingredients_service.dart';
-import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/src/user_input_utils.dart';
 import 'package:winemaker/view/utils/form_builder.dart';
 
 class IngredientsForm extends StatefulWidget {
-  const IngredientsForm({Key? key, required this.currentTaskIndex}) : super(key: key);
-
-  final int currentTaskIndex;
+  const IngredientsForm({Key? key}) : super(key: key);
 
   @override
   _IngredientsFormState createState() => _IngredientsFormState();
@@ -21,7 +18,6 @@ class _IngredientsFormState extends State<IngredientsForm> {
   bool wasYeastAdded = false;
   bool wereNutrientsAdded = false;
   late IngredientsService ingredientsService;
-  late RecipeRealizationService recipeRealizationService;
 
   @override
   void dispose() {
@@ -33,7 +29,6 @@ class _IngredientsFormState extends State<IngredientsForm> {
   @override
   Widget build(BuildContext context) {
     ingredientsService = IngredientsService(context);
-    recipeRealizationService = RecipeRealizationService(context);
 
     return Form(
       key: _formKey,

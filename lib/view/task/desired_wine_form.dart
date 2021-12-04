@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:winemaker/src/desired_wine/desired_wine.dart';
 import 'package:winemaker/src/desired_wine/desired_wine_service.dart';
-import 'package:winemaker/src/recipe/realization/recipe_realization_service.dart';
 import 'package:winemaker/src/user_input_utils.dart';
 import 'package:winemaker/view/utils/form_builder.dart';
 
 class DesiredWineForm extends StatefulWidget {
-  const DesiredWineForm({Key? key, required this.currentTaskIndex}) : super(key: key);
-
-  final int currentTaskIndex;
+  const DesiredWineForm({Key? key}) : super(key: key);
 
   @override
   _DesiredWineFormState createState() => _DesiredWineFormState();
@@ -19,7 +16,6 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
   final desiredAlcoholController = TextEditingController();
   final desiredSweetnessController = TextEditingController();
   late DesiredWineService desiredWineService;
-  late RecipeRealizationService recipeRealizationService;
 
   @override
   void dispose() {
@@ -31,7 +27,6 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
   @override
   Widget build(BuildContext context) {
     desiredWineService = DesiredWineService(context);
-    recipeRealizationService = RecipeRealizationService(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -51,7 +46,6 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _saveDesiredWine();
-                      recipeRealizationService.updateRecipeRealizationCurrentTask(widget.currentTaskIndex + 1);
                       Navigator.pop(context, true);
                     }
                   },

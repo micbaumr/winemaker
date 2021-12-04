@@ -4,27 +4,30 @@ import 'package:winemaker/view/task/desired_wine_form.dart';
 import 'package:winemaker/view/task/measurements_form.dart';
 import 'package:winemaker/view/task/must_parameters_display.dart';
 
-enum TaskType { simpleTask, desiredWineForm, measurementForm, addingIngredients, taskWithNotification }
+enum TaskType { description, desiredWineForm, measurementForm, addingIngredients, timeNotification, calculations }
 
 extension TaskTypeExtension on TaskType {
-  Widget getTaskWidget(int currentTaskIndex, {Map<String, Object>? args}) {
+  Widget getTaskWidget({Map<String, Object>? args}) {
     switch (this) {
-      case TaskType.simpleTask:
+      case TaskType.description:
         // TODO: return correct widget
-        return MustParametersDisplay(currentTaskIndex: currentTaskIndex);
+        return const MustParametersDisplay();
 
       case TaskType.desiredWineForm:
-        return DesiredWineForm(currentTaskIndex: currentTaskIndex);
+        return const DesiredWineForm();
 
       case TaskType.measurementForm:
-        return MeasurementsForm(currentTaskIndex: currentTaskIndex);
+        return const MeasurementsForm();
 
       case TaskType.addingIngredients:
-        return IngredientsScreen(currentTaskIndex: currentTaskIndex);
+        return const IngredientsScreen();
 
-      case TaskType.taskWithNotification:
+      case TaskType.timeNotification:
         // TODO: return correct widget
-        return MeasurementsForm(currentTaskIndex: currentTaskIndex);
+        return const MeasurementsForm();
+
+      case TaskType.calculations:
+        return const MustParametersDisplay();
     }
   }
 }

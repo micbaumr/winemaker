@@ -84,7 +84,7 @@ class RecipeView extends StatelessWidget {
     var task = tasks[taskIndex];
     return TaskRow(
       label: task.name,
-      taskScreen: task.type.getTaskWidget(currentTaskIndex),
+      taskScreen: task.type.getTaskWidget(),
       isCompleted: (currentTaskIndex) > taskIndex,
       isAvailable: currentTaskIndex == taskIndex,
       onCompleted: onTaskComplete,

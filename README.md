@@ -15,7 +15,9 @@ Tasks:
     - [ ] Verify values (negative)
     - [ ] Fix text
     - [ ] Change view
-- [ ] Add calculator
+- [ ] Add calculator:
+  - [ ] Replace mocked calculations with real one
+  - [ ] Change must parameters display screen to "confirm must parameters and desired wine and apply calculations" screen
 - [ ] Add alcohol measurement/calculation screen
 - [ ] Add task with time notification
 - [ ] Add task with description
