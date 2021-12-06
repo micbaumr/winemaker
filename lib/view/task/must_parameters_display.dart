@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:winemaker/src/calculator/ingredients_calculator.dart';
 import 'package:winemaker/src/desired_wine/desired_wine.dart';
 import 'package:winemaker/src/desired_wine/desired_wine_service.dart';
 import 'package:winemaker/src/future/future_mapper.dart';
-import 'package:winemaker/src/ingredients/ingredients.dart';
-import 'package:winemaker/src/ingredients/ingredients_service.dart';
 import 'package:winemaker/src/must/must_measurements.dart';
 import 'package:winemaker/src/must/must_service.dart';
 import 'package:winemaker/view/constants.dart';
@@ -16,7 +15,7 @@ class MustParametersDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final mustService = MustService(context);
     final desiredWineService = DesiredWineService(context);
-    final ingredientsService = IngredientsService(context);
+    final ingredientsCalculator = IngredientsCalculator(context);
 
     var _must = mustService.getMustMeasurementsById(1);
 
@@ -34,7 +33,7 @@ class MustParametersDisplay extends StatelessWidget {
             child: const Text("Calculate required ingredients"),
             onPressed: () {
               //TODO CALCULATE REQUIRED INGREDIENTS
-              ingredientsService.saveInitialIngredients(1, Ingredients(15, 30, true, true));
+              ingredientsCalculator.calculateAndSaveIngredients();
               Navigator.pop(context, true);
             },
           ),

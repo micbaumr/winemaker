@@ -27,7 +27,7 @@ class IngredientsService {
     );
   }
 
-  void saveInitialIngredients(int id, Ingredients requiredIngredients) {
+  void saveInitialIngredients(Ingredients requiredIngredients) {
     const initialZero = 0.0;
     const initialFalse = false;
 
