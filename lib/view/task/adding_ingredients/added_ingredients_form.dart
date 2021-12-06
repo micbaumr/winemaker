@@ -17,7 +17,6 @@ class _IngredientsFormState extends State<IngredientsForm> {
   final waterController = TextEditingController();
   bool wasYeastAdded = false;
   bool wereNutrientsAdded = false;
-  late IngredientsService ingredientsService;
 
   @override
   void dispose() {
@@ -28,8 +27,6 @@ class _IngredientsFormState extends State<IngredientsForm> {
 
   @override
   Widget build(BuildContext context) {
-    ingredientsService = IngredientsService(context);
-
     return Form(
       key: _formKey,
       child: Column(
@@ -85,6 +82,7 @@ class _IngredientsFormState extends State<IngredientsForm> {
   void _saveIngredients(BuildContext context) {
     var sugar = parseDoubleInput(sugarController.text);
     var water = parseDoubleInput(waterController.text);
-    ingredientsService.saveAddedIngredients(1, Ingredients(sugar, water, wasYeastAdded, wereNutrientsAdded));
+    var ingredients = Ingredients(sugar, water, wasYeastAdded, wereNutrientsAdded);
+    saveAddedIngredients(1, ingredients, context);
   }
 }

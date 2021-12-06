@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:moor/ffi.dart';
 import 'package:moor/moor.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:winemaker/src/constants/recipes.dart';
 import 'package:winemaker/src/desired_wine/database/desired_wine_dao.dart';
 import 'package:winemaker/src/desired_wine/database/desired_wine_entity.dart';
@@ -39,3 +41,5 @@ class MyDatabase extends _$MyDatabase {
         await m.createAll();
       });
 }
+
+MyDatabase getDatabase(BuildContext context) => Provider.of<MyDatabase>(context, listen: false);

@@ -8,9 +8,7 @@ class RequiredIngredientsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ingredientsService = IngredientsService(context);
-
-    var _ingredients = ingredientsService.getRemainingIngredients(1);
+    var _ingredients = getRemainingIngredients(1, context);
 
     return getIngredientsFutureBuilder(_ingredients);
   }
@@ -23,10 +21,8 @@ class RequiredIngredientsDisplay extends StatelessWidget {
             children: [
               Text("Water: ${snapshot.data?.water} l", style: biggerFont),
               Text("Sugar: ${snapshot.data?.sugar} kg", style: biggerFont),
-              if (snapshot.data != null && snapshot.data!.yeast)
-                const Text("Please add yeast"),
-              if (snapshot.data != null && snapshot.data!.nutrients)
-                const Text("Please add nutrients"),
+              if (snapshot.data != null && snapshot.data!.yeast) const Text("Please add yeast"),
+              if (snapshot.data != null && snapshot.data!.nutrients) const Text("Please add nutrients"),
             ],
           );
         });

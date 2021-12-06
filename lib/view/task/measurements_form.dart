@@ -15,7 +15,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
   final _formKey = GlobalKey<FormState>();
   final volumeController = TextEditingController();
   final sugarController = TextEditingController();
-  late MustService mustService;
 
   @override
   void dispose() {
@@ -26,8 +25,6 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
 
   @override
   Widget build(BuildContext context) {
-    mustService = MustService(context);
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Provide necessary data'),
@@ -45,7 +42,7 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
                   child: const Text('Submit'),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      _saveMeasurements();
+                      _saveMeasurements(context);
                       Navigator.pop(context, true);
                     }
                   },
@@ -56,9 +53,10 @@ class _MeasurementsFormState extends State<MeasurementsForm> {
         ));
   }
 
-  void _saveMeasurements() {
+  void _saveMeasurements(BuildContext context) {
     var volume = parseDoubleInput(volumeController.text);
     var sugar = parseDoubleInput(sugarController.text);
-    mustService.saveInitialMustMeasurements(MustMeasurements(volume, sugar));
+    var mustMeasurements = MustMeasurements(volume, sugar);
+    saveInitialMustMeasurements(mustMeasurements, context);
   }
 }

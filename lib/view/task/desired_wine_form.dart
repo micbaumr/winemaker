@@ -15,7 +15,6 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
   final _formKey = GlobalKey<FormState>();
   final desiredAlcoholController = TextEditingController();
   final desiredSweetnessController = TextEditingController();
-  late DesiredWineService desiredWineService;
 
   @override
   void dispose() {
@@ -26,8 +25,6 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
 
   @override
   Widget build(BuildContext context) {
-    desiredWineService = DesiredWineService(context);
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Provide necessary data'),
@@ -45,7 +42,7 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
                   child: const Text('Submit'),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      _saveDesiredWine();
+                      _saveDesiredWine(context);
                       Navigator.pop(context, true);
                     }
                   },
@@ -56,9 +53,10 @@ class _DesiredWineFormState extends State<DesiredWineForm> {
         ));
   }
 
-  void _saveDesiredWine() {
+  void _saveDesiredWine(BuildContext context) {
     var alcohol = parseDoubleInput(desiredAlcoholController.text);
     var sugar = parseDoubleInput(desiredSweetnessController.text);
-    desiredWineService.saveDesiredWineParameters(DesiredWine(alcohol, sugar));
+    var desiredWine = DesiredWine(alcohol, sugar);
+    saveDesiredWineParameters(desiredWine, context);
   }
 }

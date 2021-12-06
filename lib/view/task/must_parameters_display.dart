@@ -13,13 +13,9 @@ class MustParametersDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mustService = MustService(context);
-    final desiredWineService = DesiredWineService(context);
-    final ingredientsCalculator = IngredientsCalculator(context);
+    var _must = getMustMeasurementsById(1, context);
 
-    var _must = mustService.getMustMeasurementsById(1);
-
-    var _desiredWineParameters = desiredWineService.getDesiredWineById(1);
+    var _desiredWineParameters = getDesiredWineById(1, context);
 
     final List<Widget> mustParameters = getMustParameterDisplay(_desiredWineParameters, _must);
 
@@ -32,8 +28,7 @@ class MustParametersDisplay extends StatelessWidget {
           ElevatedButton(
             child: const Text("Calculate required ingredients"),
             onPressed: () {
-              //TODO CALCULATE REQUIRED INGREDIENTS
-              ingredientsCalculator.calculateAndSaveIngredients();
+              calculateAndSaveIngredients(context);
               Navigator.pop(context, true);
             },
           ),

@@ -20,10 +20,8 @@ class RecipeViewWrapper extends StatefulWidget {
 class _RecipeViewWrapperState extends State<RecipeViewWrapper> {
   @override
   Widget build(BuildContext context) {
-    final recipeRealizationService = RecipeRealizationService(context);
-
-    recipeRealizationService.saveRecipeRealization(RecipeRealization(0, AvailableRecipes.redWine));
-    var _recipeRealization = recipeRealizationService.getRecipeRealizationById(widget.realizationId);
+    saveRecipeRealization(RecipeRealization(0, AvailableRecipes.redWine), context);
+    var _recipeRealization = getRecipeRealizationById(widget.realizationId, context);
 
     return FutureBuilder<RecipeRealization>(
       future: _recipeRealization,
@@ -33,8 +31,7 @@ class _RecipeViewWrapperState extends State<RecipeViewWrapper> {
           return RecipeView(
             tasks: snapshot.data?.recipe.getRecipe().tasks ?? List.empty(),
             currentTaskIndex: currentTaskIndex,
-            recipeRealizationService: recipeRealizationService,
-            onTaskComplete: () => completeTaskAndRefresh(recipeRealizationService, currentTaskIndex),
+            onTaskComplete: () => completeTaskAndRefresh(currentTaskIndex, context),
           );
         } else if (snapshot.hasError) {
           return Text('Error: $snapshot');
@@ -45,20 +42,17 @@ class _RecipeViewWrapperState extends State<RecipeViewWrapper> {
     );
   }
 
-  void completeTaskAndRefresh(RecipeRealizationService recipeRealizationService, int currentTaskIndex) {
-    recipeRealizationService.updateRecipeRealizationCurrentTask(currentTaskIndex + 1);
+  void completeTaskAndRefresh(int currentTaskIndex, BuildContext context) {
+    updateRecipeRealizationCurrentTask(currentTaskIndex + 1, context);
     setState(() {});
   }
 }
 
 class RecipeView extends StatelessWidget {
-  const RecipeView(
-      {Key? key, required this.tasks, required this.currentTaskIndex, required this.recipeRealizationService, required this.onTaskComplete})
-      : super(key: key);
+  const RecipeView({Key? key, required this.tasks, required this.currentTaskIndex, required this.onTaskComplete}) : super(key: key);
 
   final List<Task> tasks;
   final int currentTaskIndex;
-  final RecipeRealizationService recipeRealizationService;
   final Function() onTaskComplete;
 
   @override
